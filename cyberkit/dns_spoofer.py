@@ -32,7 +32,7 @@ def iptables():
     subprocess.call('iptables -I FORWARD -j NFQUEUE --queue-num 0', shell=True)
 
 
-def run_queue():
+def run_queue(spoof, redirect):
     queue = nfq.NetfilterQueue()
     queue.bind(
         0, functools.partial(process_packet, spoof=spoof, redirect=redirect))
@@ -59,11 +59,14 @@ def process_packet(packet, spoof, redirect):
     packet.accept()
 
 
-(spoof, redirect) = get_args()
-try:
-    iptables()
-    run_queue()
-except KeyboardInterrupt:
-    print('\n/!/ Quitting DNS Spoofer.')
-    print('/-/ Flushing iptables.')
-    subprocess.call('iptables --flush', shell=True)
+def main():
+    (spoof, redirect) = get_args()
+    try:
+        iptables()
+        run_queue(spoof, redirect)
+    except KeyboardInterrupt:
+        print('\n/!/ Quitting DNS Spoofer.')
+        print('/-/ Flushing iptables.')
+        subprocess.call('iptables --flush', shell=True)
+
+main()

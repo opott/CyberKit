@@ -36,7 +36,9 @@ def print_results(results):
     for client in results:
         print(f'{client['ip']} \t | {client['mac']}')
 
+def main():
+    target = get_args()
+    scan_result = scan(target)
+    print_results(scan_result)
 
-target = get_args()
-scan_result = scan(target)
-print_results(scan_result)
+main()

@@ -52,11 +52,15 @@ def compare_mac(interface, mac):
         print(f'/-/ Actual MAC address of {interface} is {new_mac}')
 
 
-(interface, mac) = get_args()
+def main():
+    (interface, mac) = get_args()
 
-initial_mac = check_mac(interface)
-print(f'/-/ The current MAC address of {interface} is {initial_mac}')
+    initial_mac = check_mac(interface)
+    print(f'/-/ The current MAC address of {interface} is {initial_mac}')
 
-change_mac(interface, mac)
+    change_mac(interface, mac)
 
-compare_mac(interface, mac)
+    compare_mac(interface, mac)
+
+if __name__ == '__main__':
+    main()
