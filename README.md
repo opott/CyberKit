@@ -11,6 +11,10 @@ Pentesting tools made with Python.
 
 More planned for the future!
 
+## Usage
+`pip install cyberkit`
+`cyberkit <tool_name> [args]`
+
 ## Compatibility
 
 Note that this has currently only been tested on Linux systems (Kali), and compatibility with other operating systems is not guaranteed.
